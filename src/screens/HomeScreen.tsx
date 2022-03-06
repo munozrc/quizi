@@ -1,7 +1,7 @@
 export const HomeScreen = () => {
   return (
     <main>
-      <h1>Cuestionario</h1>
+      <h1>Quizi</h1>
     </main>
   )
 }
