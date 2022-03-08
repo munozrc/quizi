@@ -1,13 +1,16 @@
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import './main.css'
 import { HomeScreen } from './screens/HomeScreen'
+import { QuizScreen } from './screens/QuizScreen'
+
+import './main.css'
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomeScreen />} />
+      <Route path="/quiz" element={<QuizScreen />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
