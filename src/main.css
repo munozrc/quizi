@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -18,4 +19,11 @@ html, body, #root {
   width: 100%;
   height: 100vh;
   background-color: var(--bg-color);
+}
+
+button {
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
