@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom'
 
+import { Button } from '../components/Button'
 import { useQuiz } from '../hooks/useQuiz'
 
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
   const { id } = useParams()
-  const { quiz, question, checkAnswer } = useQuiz(id)
+  const { quiz, question, isQuestionAnswered, checkAnswer, nextQuestion } = useQuiz(id)
 
   if (typeof quiz === 'undefined') return <p>Cargando...</p>
   if (quiz === null) return <p>Quiz no encontrado</p>
@@ -29,6 +30,7 @@ export const QuizScreen = () => {
               </button>
             ))
           }
+          {isQuestionAnswered && <Button onClick={nextQuestion}>Siguiente</Button>}
         </footer>
       </section>
     </main>

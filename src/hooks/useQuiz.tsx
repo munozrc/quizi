@@ -5,7 +5,7 @@ import demo from '../assets/demo.json'
 
 export const useQuiz = (id: string | undefined) => {
   const [currentQuiz, setCurrentQuiz] = useState<Quiz | null | undefined >(undefined)
-  const [activeQuestion] = useState<number>(0)
+  const [activeQuestion, setActiveQuestion] = useState<number>(0)
   const [isQuestionAnswered, setIsQuestionAnswered] = useState<boolean>(false)
 
   useEffect(() => {
@@ -24,10 +24,18 @@ export const useQuiz = (id: string | undefined) => {
     setIsQuestionAnswered(true)
   }
 
+  const nextQuestion = () => {
+    if (isQuestionAnswered && activeQuestion < 2) {
+      setActiveQuestion(prev => prev + 1)
+      setIsQuestionAnswered(false)
+    }
+  }
+
   return {
     quiz: currentQuiz,
     question: currentQuiz?.questions[activeQuestion],
     isQuestionAnswered,
-    checkAnswer
+    checkAnswer,
+    nextQuestion
   }
 }
