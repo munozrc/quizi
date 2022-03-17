@@ -25,7 +25,12 @@ export const useQuiz = (id: string | undefined) => {
   }
 
   const nextQuestion = () => {
-    if (isQuestionAnswered && activeQuestion < 2) {
+    if (typeof currentQuiz === 'undefined' || currentQuiz === null) return
+
+    const questionsLenght = currentQuiz.questions.length - 1
+    const isMinorPosition = activeQuestion < questionsLenght
+
+    if (isQuestionAnswered && isMinorPosition) {
       setActiveQuestion(prev => prev + 1)
       setIsQuestionAnswered(false)
     }
