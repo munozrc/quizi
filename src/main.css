@@ -32,13 +32,13 @@ button {
 }
 
 .correct {
-  border: 2px solid var(--correct-color);
+  border: 1px solid var(--correct-color);
   background-color: var(--correct-color);
   color: var(--white-text-color);
 }
 
 .wrong {
-  border: 2px solid var(--wrong-color);
+  border: 1px solid var(--wrong-color);
   background-color: var(--wrong-color);
   color: var(--white-text-color);
 }
