@@ -35,7 +35,7 @@
   color: var(--text-color);
   font-size: 1.2em;
   font-weight: 500;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, background-color 0.2s ease-in, border 0.2s ease-in;
 }
 
 .quiz__answer:hover {
