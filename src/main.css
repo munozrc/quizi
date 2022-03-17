@@ -13,6 +13,9 @@
   --text-secondary-color: #444444;
   --bg-color: #fbfbfb;
   --shadow-color: rgba(18, 18, 18, 0.3);
+  --wrong-color: #FC4F4F;
+  --correct-color: #61B15A;
+  --white-text-color: #FFF;
 }
 
 html, body, #root {
@@ -26,4 +29,16 @@ button {
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+.correct {
+  border: 2px solid var(--correct-color);
+  background-color: var(--correct-color);
+  color: var(--white-text-color);
+}
+
+.wrong {
+  border: 2px solid var(--wrong-color);
+  background-color: var(--wrong-color);
+  color: var(--white-text-color);
 }
