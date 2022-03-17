@@ -4,22 +4,40 @@
     {
       "statement": "¿Se puede considera el calor del sol como bien NO económico?",
       "type": "BOOLEAN",
-      "answer": "0",
-      "options": {
-        "0": "Falso",
-        "1": "Verdadero"
-      }
+      "answer": 1,
+      "options": [
+        {
+          "key": 0,
+          "value": "Falso"
+        },
+        {
+          "key": 1,
+          "value": "Verdadero"
+        }
+      ]
     },
     {
       "statement": "¿Tierra, capital y trabajo son?",
       "type": "MULTIPLE_CHOICES",
-      "answer": "0",
-      "options": {
-        "0": "Agentes economicos",
-        "1": "Bienes",
-        "2": "Medios de produccion",
-        "3": "Factores productivos"
-      }
+      "answer": 3,
+      "options": [
+        {
+          "key": 0,
+          "value": "Agentes economicos"
+        },
+        {
+          "key": 1,
+          "value": "Bienes"
+        },
+        {
+          "key": 2,
+          "value": "Medios de produccion"
+        },
+        {
+          "key": 3,
+          "value": "Factores productivos"
+        }
+      ]
     }
   ]
 }
