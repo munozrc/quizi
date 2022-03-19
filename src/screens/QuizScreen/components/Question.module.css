@@ -3,12 +3,18 @@
   max-width: 450px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
 }
 
 .statement {
   font-size: 2em;
   font-weight: 400;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .question {

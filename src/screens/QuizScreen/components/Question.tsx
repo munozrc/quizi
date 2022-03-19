@@ -32,20 +32,22 @@ export const Question = ({ statement, options, answer } : QuestionProps) => {
       <header className={styles.header}>
         <p className={styles.statement}>{statement}</p>
       </header>
-      <div className={styles.question}>
-        {options.map(({ key, value }) => (
-          <button
-            key={key}
-            name={key + ''}
-            ref={key === answer ? correctAnswerRef : undefined}
-            className={`${styles.option}`}
-            onClick={checkAnswer}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
-      <Button disabled={!isQuestionAnswered}>Siguiente</Button>
+      <footer className={styles.footer}>
+        <div className={styles.question}>
+          {options.map(({ key, value }) => (
+            <button
+              key={key}
+              name={key + ''}
+              ref={key === answer ? correctAnswerRef : undefined}
+              className={`${styles.option}`}
+              onClick={checkAnswer}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+        <Button disabled={!isQuestionAnswered}>Siguiente</Button>
+      </footer>
     </div>
   )
 }
