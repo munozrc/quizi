@@ -1,46 +1,33 @@
-import { MouseEvent, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import { Quiz } from '../../../typings'
+import { QuizStatus } from '../../../typings'
 import demo from '../../../assets/demo.json'
 
-export const useQuiz = (id: string | undefined) => {
-  const [currentQuiz, setCurrentQuiz] = useState<Quiz | null | undefined >(undefined)
+export const useQuiz = () => {
+  const { id } = useParams()
+  const [currentQuiz, setCurrentQuiz] = useState<QuizStatus>(undefined)
   const [activeQuestion, setActiveQuestion] = useState<number>(0)
-  const [isQuestionAnswered, setIsQuestionAnswered] = useState<boolean>(false)
 
   useEffect(() => {
-    if (id === 'demo') setCurrentQuiz(demo)
-    else setCurrentQuiz(null)
+    if (id === 'demo') return setCurrentQuiz(demo)
+    setCurrentQuiz(null)
   }, [id])
 
-  const checkAnswer = (event: MouseEvent<HTMLButtonElement>, key: number) => {
-    const { target } = event
-    const { classList } = target as HTMLButtonElement
-    const currentAnswer = currentQuiz?.questions[activeQuestion].answer
+  const nextQuestion = useCallback(() => {
+    // Check if there is a valid quiz
+    if (currentQuiz == null) return
 
-    if (key === currentAnswer) classList.add('correct')
-    else classList.add('wrong')
+    // Get the total number of questions
+    const questionsNumber = currentQuiz.questions.length - 1
 
-    setIsQuestionAnswered(true)
-  }
-
-  const nextQuestion = () => {
-    if (typeof currentQuiz === 'undefined' || currentQuiz === null) return
-
-    const questionsLenght = currentQuiz.questions.length - 1
-    const isMinorPosition = activeQuestion < questionsLenght
-
-    if (isQuestionAnswered && isMinorPosition) {
-      setActiveQuestion(prev => prev + 1)
-      setIsQuestionAnswered(false)
-    }
-  }
+    // Check if there is a next question
+    if (activeQuestion < questionsNumber) setActiveQuestion(prev => prev + 1)
+  }, [])
 
   return {
     quiz: currentQuiz,
     question: currentQuiz?.questions[activeQuestion],
-    isQuestionAnswered,
-    checkAnswer,
     nextQuestion
   }
 }
