@@ -20,6 +20,11 @@
   border: 3px solid var(--text-secondary-color);
 }
 
+.primary.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
 .flat {
   align-items: center;
   justify-content: center;
