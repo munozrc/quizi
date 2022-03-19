@@ -23,7 +23,7 @@ export const useQuiz = () => {
 
     // Check if there is a next question
     if (activeQuestion < questionsNumber) setActiveQuestion(prev => prev + 1)
-  }, [])
+  }, [currentQuiz, activeQuestion])
 
   return {
     quiz: currentQuiz,
