@@ -4,9 +4,11 @@ import { Question as QuestionType } from '../../../typings'
 
 import styles from './Question.module.css'
 
-interface QuestionProps extends QuestionType {}
+interface QuestionProps extends QuestionType {
+  goToNextQuestion: () => void
+}
 
-export const Question = ({ statement, options, answer } : QuestionProps) => {
+export const Question = ({ statement, options, answer, goToNextQuestion } : QuestionProps) => {
   const { ref, isQuestionAnswered, checkAnswer } = useQuestion(answer, styles)
   return (
     <div className={styles.container}>
@@ -27,7 +29,7 @@ export const Question = ({ statement, options, answer } : QuestionProps) => {
             </button>
           ))}
         </div>
-        <Button disabled={!isQuestionAnswered}>Siguiente</Button>
+        <Button onClick={goToNextQuestion} disabled={!isQuestionAnswered}>Siguiente</Button>
       </footer>
     </div>
   )
