@@ -9,3 +9,8 @@ export interface Quiz {
   title: string
   questions: Array<Question>
 }
+
+export type QuizStatus =
+  Quiz | // There is a quiz
+  null | // Valid quiz not found
+  undefined // A quiz is loading
