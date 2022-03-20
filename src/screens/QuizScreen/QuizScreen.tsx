@@ -11,7 +11,7 @@ export const QuizScreen = () => {
 
   return (
     <main className={styles.container}>
-      <Question {...question} goToNextQuestion={nextQuestion} />
+      <Question key={question.statement} {...question} goToNextQuestion={nextQuestion} />
     </main>
   )
 }

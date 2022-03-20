@@ -19,7 +19,7 @@ export const Question = ({ statement, options, answer, goToNextQuestion } : Ques
         <div className={styles.question}>
           {options.map(({ key, value }) => (
             <button
-              key={`${key}-${value}`}
+              key={key}
               name={key + ''}
               ref={key === answer ? ref : undefined}
               className={`${styles.option}`}
