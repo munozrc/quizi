@@ -28,9 +28,12 @@
 .flat {
   align-items: center;
   justify-content: center;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--text-color)
 }
 
 .flat > svg {
-  color: var(--text-color);
-  font-size: 2.4em;
+  color: inherit;
+  font-size: 2em;
 }
