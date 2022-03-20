@@ -1,6 +1,7 @@
 import useQuestion from '../hooks/useQuestion'
 import { Button } from '../../../components/Button'
 import { Question as QuestionType } from '../../../typings'
+import { ArrowIcon } from '../../../components/icons'
 
 import styles from './Question.module.css'
 
@@ -29,7 +30,14 @@ export const Question = ({ statement, options, answer, goToNextQuestion } : Ques
             </button>
           ))}
         </div>
-        <Button onClick={goToNextQuestion} disabled={!isQuestionAnswered}>Siguiente</Button>
+        <Button
+          onClick={goToNextQuestion}
+          disabled={!isQuestionAnswered}
+          variant={'flat'}
+        >
+          Siguiente
+          <ArrowIcon />
+        </Button>
       </footer>
     </div>
   )

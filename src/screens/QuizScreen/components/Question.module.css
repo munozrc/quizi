@@ -6,9 +6,17 @@
   gap: 30px;
 }
 
+.header {
+  background-color: var(--text-color);
+  border-radius: 8px;
+  padding: 30px;
+}
+
 .statement {
   font-size: 2em;
   font-weight: 400;
+  line-height: 1.1;
+  color: var(--bg-color)
 }
 
 .footer {
