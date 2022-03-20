@@ -21,7 +21,7 @@ export const Question = ({ statement, options, answer, goToNextQuestion } : Ques
           {options.map(({ key, value }) => (
             <button
               key={key}
-              name={key + ''}
+              name={key.toString()}
               ref={key === answer ? ref : undefined}
               className={`${styles.option}`}
               onClick={checkAnswer}
