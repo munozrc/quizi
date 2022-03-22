@@ -1,5 +1,6 @@
 import { useQuiz } from './hooks/useQuiz'
 import { Question } from './components'
+import { Card } from './components/Card'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
@@ -11,7 +12,9 @@ export const QuizScreen = () => {
 
   return (
     <main className={styles.container}>
-      <Question key={question.statement} {...question} goToNextQuestion={nextQuestion} />
+      <Card>
+        <Question key={question.statement} {...question} goToNextQuestion={nextQuestion} />
+      </Card>
     </main>
   )
 }
