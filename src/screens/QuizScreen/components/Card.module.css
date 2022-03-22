@@ -6,3 +6,18 @@
   border-radius: 8px;
   box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);
 }
+
+.header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.counter {
+  font-size: 1.1em;
+  color: var(--text-color)
+}
+
+.counter > strong {
+  font-size: 1.6em;
+  font-weight: 700;
+}

@@ -12,8 +12,15 @@ export const QuizScreen = () => {
 
   return (
     <main className={styles.container}>
-      <Card>
-        <Question key={question.statement} {...question} goToNextQuestion={nextQuestion} />
+      <Card
+        current={quiz.questions.indexOf(question) + 1}
+        length={quiz.questions.length}
+      >
+        <Question
+          key={question.statement}
+          goToNextQuestion={nextQuestion}
+          {...question}
+        />
       </Card>
     </main>
   )
