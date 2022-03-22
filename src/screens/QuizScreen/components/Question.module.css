@@ -33,13 +33,14 @@
 .question {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: 1em;
 }
 
 .option {
-  padding: 20px;
+  text-align: left;
+  padding: 14px 20px;
   border: 1px solid var(--shadow-color);
   border-radius: 100px;
   color: var(--text-color);
@@ -83,15 +84,8 @@
   .footer {
     align-items: flex-end;
   }
-
-  .question {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 1.4em;
-  }
-
+  
   .option{
-    padding: 14px;
     font-size: 1.4em;
   }
 
