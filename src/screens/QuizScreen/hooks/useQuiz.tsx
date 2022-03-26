@@ -7,6 +7,7 @@ import demo from '../../../assets/demo.json'
 export const useQuiz = () => {
   const { id } = useParams()
   const [currentQuiz, setCurrentQuiz] = useState<QuizStatus>(undefined)
+  const [isStartedQuiz, setStartedQuiz] = useState<boolean>(false)
   const [activeQuestion, setActiveQuestion] = useState<number>(0)
 
   useEffect(() => {
@@ -28,6 +29,8 @@ export const useQuiz = () => {
   return {
     quiz: currentQuiz,
     question: currentQuiz?.questions[activeQuestion],
-    nextQuestion
+    isStartedQuiz,
+    nextQuestion,
+    startQuiz: () => setStartedQuiz(true)
   }
 }
