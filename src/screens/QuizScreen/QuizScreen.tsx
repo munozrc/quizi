@@ -1,8 +1,7 @@
 import { PageLayout } from '../../components/Layout'
 
 import { useQuiz } from './hooks/useQuiz'
-import { Question } from './components'
-import { Card } from './components/Card'
+import { Question, Card } from './components'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
