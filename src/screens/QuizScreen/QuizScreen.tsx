@@ -1,7 +1,7 @@
 import { PageLayout } from '../../components/Layout'
 
 import { useQuiz } from './hooks/useQuiz'
-import { Question, Card, QuizMenu } from './components'
+import { Question, Card, QuizMenu, CardHeader } from './components'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
@@ -11,14 +11,18 @@ export const QuizScreen = () => {
   if (typeof question === 'undefined') return <p>Error al cargar la pregunta</p>
   if (quiz === null) return <p>Quiz no encontrado</p>
 
+  const currentIndex = quiz.questions.indexOf(question) + 1
+  const numberOfQuestions = quiz.questions.length
+
   return (
     <PageLayout>
       <main className={styles.container}>
         {isStartedQuiz && (
-          <Card
-            current={quiz.questions.indexOf(question) + 1}
-            length={quiz.questions.length}
-          >
+          <Card>
+            <CardHeader
+              currentIndex={currentIndex}
+              numberQuestions={numberOfQuestions}
+            />
             <Question
               key={question.statement}
               goToNextQuestion={nextQuestion}
@@ -26,8 +30,12 @@ export const QuizScreen = () => {
             />
           </Card>
         )}
-
-        {!isStartedQuiz && <QuizMenu title={quiz.title} numberQuestions={quiz.questions.length} />}
+        {!isStartedQuiz && (
+          <QuizMenu
+            title={quiz.title}
+            numberQuestions={numberOfQuestions}
+          />
+        )}
       </main>
     </PageLayout>
   )
