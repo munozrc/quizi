@@ -14,7 +14,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
         <h1 className={styles.logo}>Quizi</h1>
         <nav className={styles.navbar}>
           <Link to="/" className={styles.navbar__item}>Inicio</Link>
-          <Link to="/quiz" className={styles.navbar__item}>Quizes</Link>
+          <Link to="/quizzes" className={styles.navbar__item}>Quizzes</Link>
         </nav>
       </header>
       {children}
