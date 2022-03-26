@@ -7,9 +7,10 @@ import styles from './Question.module.css'
 
 interface QuestionProps extends QuestionType {
   goToNextQuestion: () => void
+  isLastQuestion: boolean
 }
 
-export const Question = ({ statement, options, answer, goToNextQuestion } : QuestionProps) => {
+export const Question = ({ statement, options, answer, isLastQuestion, goToNextQuestion } : QuestionProps) => {
   const { ref, isQuestionAnswered, checkAnswer } = useQuestion(answer, styles)
   return (
     <div className={styles.container}>
@@ -35,7 +36,7 @@ export const Question = ({ statement, options, answer, goToNextQuestion } : Ques
           disabled={!isQuestionAnswered}
           variant={'flat'}
         >
-          Siguiente
+          {isLastQuestion ? 'Terminar' : 'Siguiente'}
           <ArrowIcon />
         </Button>
       </footer>
