@@ -17,27 +17,23 @@ export const QuizScreen = () => {
   return (
     <PageLayout>
       <main className={styles.container}>
-        {isStartedQuiz && (
-          <Card>
-            <CardHeader
-              currentIndex={currentIndex}
-              numberQuestions={numberOfQuestions}
-            />
-            <Question
-              key={question.statement}
-              goToNextQuestion={nextQuestion}
-              {...question}
-            />
-          </Card>
-        )}
-        {!isStartedQuiz && (
-          <Card>
-            <QuizMenu
-              title={quiz.title}
-              numberQuestions={numberOfQuestions}
-            />
-          </Card>
-        )}
+        <Card isVisible={isStartedQuiz}>
+          <CardHeader
+            currentIndex={currentIndex}
+            numberQuestions={numberOfQuestions}
+          />
+          <Question
+            key={question.statement}
+            goToNextQuestion={nextQuestion}
+            {...question}
+          />
+        </Card>
+        <Card isVisible={!isStartedQuiz}>
+          <QuizMenu
+            title={quiz.title}
+            numberQuestions={numberOfQuestions}
+          />
+        </Card>
       </main>
     </PageLayout>
   )
