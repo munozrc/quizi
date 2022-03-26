@@ -17,7 +17,6 @@ export const useQuiz = () => {
   useEffect(() => {
     if (id === 'demo') return setCurrentQuiz(demo)
     setCurrentQuiz(null)
-    setSearchParams({ status: 'making', currentIndex: '0', range: '0' })
   }, [id])
 
   const nextQuestion = useCallback(() => {
