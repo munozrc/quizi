@@ -8,8 +8,8 @@ export const QuizScreen = () => {
   const { quiz, question, isStartedQuiz, nextQuestion, startQuiz } = useQuiz()
 
   if (typeof quiz === 'undefined') return <p>Cargando...</p>
-  if (typeof question === 'undefined') return <p>Error al cargar la pregunta</p>
   if (quiz === null) return <p>Quiz no encontrado</p>
+  if (typeof question === 'undefined') return <p>Error al cargar la pregunta</p>
 
   const currentIndex = quiz.questions.indexOf(question) + 1
   const numberOfQuestions = quiz.questions.length
