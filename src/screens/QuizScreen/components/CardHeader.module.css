@@ -1,0 +1,14 @@
+.header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.counter {
+  font-size: 1.1em;
+  color: var(--text-color)
+}
+
+.counter > strong {
+  font-size: 1.6em;
+  font-weight: 700;
+}
