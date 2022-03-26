@@ -7,7 +7,7 @@ import styles from './QuizMenu.module.css'
 interface QuizMenuProps {
   title: string
   numberQuestions: number
-  startQuiz: () => void
+  startQuiz: (range: number) => void
 }
 
 const RANGE_QUESTIONS = [0, 5, 10, 15, 20]
@@ -35,7 +35,7 @@ export const QuizMenu = ({ title, numberQuestions, startQuiz }: QuizMenuProps) =
           ))}
         </div>
       </section>
-      <Button onClick={startQuiz}>Comenzar</Button>
+      <Button onClick={() => startQuiz(activeRange)}>Comenzar</Button>
     </div>
   )
 }

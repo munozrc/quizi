@@ -8,19 +8,13 @@ export const useQuiz = () => {
   const { id } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [currentQuiz, setCurrentQuiz] = useState<QuizStatus>(undefined)
-  const [isStartedQuiz, setStartedQuiz] = useState<boolean>(false)
-  const [activeQuestion, setActiveQuestion] = useState<number>(0)
+  const isStartedQuiz: boolean = searchParams.get('started') === 'true' ?? 'false'
+  const activeQuestion: number = parseInt(searchParams.get('currentIndex') ?? '0')
 
   useEffect(() => {
-    const isStarted = searchParams.get('started') ?? 'false'
-    const currentQuestion = searchParams.get('currentIndex') ?? '0'
-
-    setSearchParams({ started: isStarted, currentIndex: currentQuestion })
-    setStartedQuiz(isStarted === 'true')
-    setActiveQuestion(+currentQuestion)
-
     if (id === 'demo') return setCurrentQuiz(demo)
     setCurrentQuiz(null)
+    setSearchParams({ started: 'false', currentIndex: '0' })
   }, [id])
 
   const nextQuestion = useCallback(() => {
@@ -31,16 +25,19 @@ export const useQuiz = () => {
     const questionsNumber = currentQuiz.questions.length - 1
 
     // Check if there is a next question
-    if (activeQuestion < questionsNumber) {
-      const value = activeQuestion + 1
-      setActiveQuestion(value)
-      setSearchParams({ started: 'true', currentIndex: value.toString() })
-    }
+    if (+activeQuestion > questionsNumber) return
+
+    // Set new values
+    const newActiveQuestion = activeQuestion + 1
+    setSearchParams({ started: 'true', currentIndex: newActiveQuestion.toString() })
   }, [currentQuiz, activeQuestion])
 
-  const startQuiz = useCallback(() => {
-    setStartedQuiz(true)
-    setSearchParams({ started: 'true', currentIndex: activeQuestion.toString() })
+  const startQuiz = useCallback((range: number) => {
+    setSearchParams({
+      started: 'true',
+      currentIndex: activeQuestion.toString(),
+      range: range.toString()
+    })
   }, [])
 
   return {
