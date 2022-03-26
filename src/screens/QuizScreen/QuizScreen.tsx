@@ -5,7 +5,7 @@ import { Question, Card, QuizMenu, CardHeader } from './components'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
-  const { quiz, question, isStartedQuiz, nextQuestion } = useQuiz()
+  const { quiz, question, isStartedQuiz, nextQuestion, startQuiz } = useQuiz()
 
   if (typeof quiz === 'undefined') return <p>Cargando...</p>
   if (typeof question === 'undefined') return <p>Error al cargar la pregunta</p>
@@ -32,6 +32,7 @@ export const QuizScreen = () => {
           <QuizMenu
             title={quiz.title}
             numberQuestions={numberOfQuestions}
+            startQuiz={startQuiz}
           />
         </Card>
       </main>
