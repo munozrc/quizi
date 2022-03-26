@@ -1,3 +1,5 @@
+import { PageLayout } from '../../components/Layout'
+
 import { useQuiz } from './hooks/useQuiz'
 import { Question } from './components'
 import { Card } from './components/Card'
@@ -11,17 +13,19 @@ export const QuizScreen = () => {
   if (quiz === null) return <p>Quiz no encontrado</p>
 
   return (
-    <main className={styles.container}>
-      <Card
-        current={quiz.questions.indexOf(question) + 1}
-        length={quiz.questions.length}
-      >
-        <Question
-          key={question.statement}
-          goToNextQuestion={nextQuestion}
-          {...question}
-        />
-      </Card>
-    </main>
+    <PageLayout>
+      <main className={styles.container}>
+        <Card
+          current={quiz.questions.indexOf(question) + 1}
+          length={quiz.questions.length}
+        >
+          <Question
+            key={question.statement}
+            goToNextQuestion={nextQuestion}
+            {...question}
+          />
+        </Card>
+      </main>
+    </PageLayout>
   )
 }
