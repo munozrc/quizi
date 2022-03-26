@@ -31,10 +31,12 @@ export const QuizScreen = () => {
           </Card>
         )}
         {!isStartedQuiz && (
-          <QuizMenu
-            title={quiz.title}
-            numberQuestions={numberOfQuestions}
-          />
+          <Card>
+            <QuizMenu
+              title={quiz.title}
+              numberQuestions={numberOfQuestions}
+            />
+          </Card>
         )}
       </main>
     </PageLayout>
