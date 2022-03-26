@@ -27,7 +27,7 @@ export const QuizScreen = () => {
           </Card>
         )}
 
-        {!isStartedQuiz && <QuizMenu />}
+        {!isStartedQuiz && <QuizMenu title={quiz.title} numberQuestions={quiz.questions.length} />}
       </main>
     </PageLayout>
   )
