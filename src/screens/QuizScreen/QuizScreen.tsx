@@ -4,9 +4,10 @@ import { Spinner } from '../../components/Spiner'
 import { useQuiz } from './hooks/useQuiz'
 import { Question, Card, QuizMenu, CardHeader } from './components'
 import styles from './QuizScreen.module.css'
+import { Results } from './components/Results'
 
 export const QuizScreen = () => {
-  const { quiz, question, quizStatus, nextQuestion, startQuiz } = useQuiz()
+  const { quiz, question, quizStatus, nextQuestion, startQuiz, finishQuiz } = useQuiz()
 
   if (typeof quiz === 'undefined') return <Spinner />
   if (quiz === null) return <p>Quiz no encontrado</p>
@@ -37,9 +38,10 @@ export const QuizScreen = () => {
             startQuiz={startQuiz}
           />
         </Card>
-        <Card isVisible={quizStatus === 'finished'}>
-          <h3>Termino el Quiz</h3>
-        </Card>
+        <Results
+          isVisible={quizStatus === 'finished'}
+          handleFinishedQuiz={finishQuiz}
+        />
       </main>
     </PageLayout>
   )

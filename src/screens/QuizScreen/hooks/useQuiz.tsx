@@ -48,11 +48,16 @@ export const useQuiz = () => {
     })
   }, [])
 
+  const finishQuiz = useCallback(() => {
+    setSearchParams({})
+  }, [])
+
   return {
     quiz: currentQuiz,
     question: currentQuiz?.questions[activeQuestion],
     quizStatus,
     nextQuestion,
-    startQuiz
+    startQuiz,
+    finishQuiz
   }
 }
