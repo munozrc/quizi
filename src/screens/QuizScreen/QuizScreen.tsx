@@ -2,9 +2,10 @@ import { PageLayout } from '../../components/Layout'
 import { Spinner } from '../../components/Spiner'
 
 import { useQuiz } from './hooks/useQuiz'
-import { Question, Card, QuizMenu, CardHeader } from './components'
+import { Question, Card, CardHeader } from './components'
 import styles from './QuizScreen.module.css'
 import { Results } from './components/Results'
+import { Setup } from './components/Setup'
 
 export const QuizScreen = () => {
   const { quiz, question, quizStatus, nextQuestion, startQuiz, finishQuiz } = useQuiz()
@@ -31,13 +32,12 @@ export const QuizScreen = () => {
             {...question}
           />
         </Card>
-        <Card isVisible={quizStatus === 'making'}>
-          <QuizMenu
-            title={quiz.title}
-            numberQuestions={numberOfQuestions}
-            startQuiz={startQuiz}
-          />
-        </Card>
+        <Setup
+          isVisible={quizStatus === 'making'}
+          numberQuestions={numberOfQuestions}
+          title={quiz.title}
+          startQuiz={startQuiz}
+        />
         <Results
           isVisible={quizStatus === 'finished'}
           handleFinishedQuiz={finishQuiz}
