@@ -1,6 +1,6 @@
 import { Button } from '../../../components/Button'
+import { Card } from '../../../components/Card'
 
-import { Card } from './Card'
 import styles from './Results.module.css'
 
 interface ResultsProps {

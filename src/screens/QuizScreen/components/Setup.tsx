@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { Button } from '../../../components/Button'
+import { Card } from '../../../components/Card'
 
-import { Card } from './Card'
 import styles from './Setup.module.css'
 
 interface SetupProps {

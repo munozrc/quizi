@@ -2,10 +2,9 @@ import useQuestion from '../hooks/useQuestion'
 import { Button } from '../../../components/Button'
 import { Question as QuestionType } from '../../../typings'
 import { ArrowIcon } from '../../../components/icons'
+import { Card, CardHeader } from '../../../components/Card'
 
 import styles from './RenderQuestion.module.css'
-import { CardHeader } from './CardHeader'
-import { Card } from './Card'
 
 interface RenderQuestionProps extends QuestionType {
   isVisible: boolean
