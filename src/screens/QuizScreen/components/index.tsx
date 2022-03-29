@@ -1,2 +1,3 @@
-export { Question } from './Question'
-export { QuizMenu } from './QuizMenu'
+export { RenderQuestion } from './RenderQuestion'
+export { Results } from './Results'
+export { Setup } from './Setup'

@@ -2,9 +2,7 @@ import { PageLayout } from '../../components/Layout'
 import { Spinner } from '../../components/Spiner'
 
 import { useQuiz } from './hooks/useQuiz'
-import { Results } from './components/Results'
-import { Setup } from './components/Setup'
-import { RenderQuestion } from './components/RenderQuestion'
+import { RenderQuestion, Results, Setup } from './components'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
@@ -17,18 +15,18 @@ export const QuizScreen = () => {
   return (
     <PageLayout>
       <main className={styles.container}>
+        <Setup
+          isVisible={quizStatus === 'making'}
+          numberQuestions={quiz.questions.length}
+          title={quiz.title}
+          startQuiz={startQuiz}
+        />
         <RenderQuestion
           key={question.statement}
           isVisible={quizStatus === 'started'}
           questions={quiz.questions}
           goToNextQuestion={nextQuestion}
           {...question}
-        />
-        <Setup
-          isVisible={quizStatus === 'making'}
-          numberQuestions={quiz.questions.length}
-          title={quiz.title}
-          startQuiz={startQuiz}
         />
         <Results
           isVisible={quizStatus === 'finished'}
