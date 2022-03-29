@@ -2,10 +2,10 @@ import { PageLayout } from '../../components/Layout'
 import { Spinner } from '../../components/Spiner'
 
 import { useQuiz } from './hooks/useQuiz'
-import { Question, Card, CardHeader } from './components'
-import styles from './QuizScreen.module.css'
 import { Results } from './components/Results'
 import { Setup } from './components/Setup'
+import { RenderQuestion } from './components/RenderQuestion'
+import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
   const { quiz, question, quizStatus, nextQuestion, startQuiz, finishQuiz } = useQuiz()
@@ -14,27 +14,19 @@ export const QuizScreen = () => {
   if (quiz === null) return <p>Quiz no encontrado</p>
   if (typeof question === 'undefined') return <p>Error al cargar la pregunta</p>
 
-  const currentIndex = quiz.questions.indexOf(question) + 1
-  const numberOfQuestions = quiz.questions.length
-
   return (
     <PageLayout>
       <main className={styles.container}>
-        <Card isVisible={quizStatus === 'started'}>
-          <CardHeader
-            currentIndex={currentIndex}
-            numberQuestions={numberOfQuestions}
-          />
-          <Question
-            key={question.statement}
-            goToNextQuestion={nextQuestion}
-            isLastQuestion={currentIndex === numberOfQuestions}
-            {...question}
-          />
-        </Card>
+        <RenderQuestion
+          key={question.statement}
+          isVisible={quizStatus === 'started'}
+          questions={quiz.questions}
+          goToNextQuestion={nextQuestion}
+          {...question}
+        />
         <Setup
           isVisible={quizStatus === 'making'}
-          numberQuestions={numberOfQuestions}
+          numberQuestions={quiz.questions.length}
           title={quiz.title}
           startQuiz={startQuiz}
         />
