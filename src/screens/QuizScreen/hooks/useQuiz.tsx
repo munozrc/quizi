@@ -1,61 +1,77 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { QuizStatus } from '../../../typings'
+import { Quiz, QuizSettings } from '../../../typings'
 import demo from '../../../assets/demo.json'
 
-type CurrentQuizStatus = 'started' | 'making' | 'finished' | string
+const defaultValues: QuizSettings = {
+  currentQuestionIndex: 0,
+  currentQuestions: [],
+  status: 'setup'
+}
+
+const getQuizSettingsFromLocalStorage = () => {
+  try {
+    const data = window.localStorage.getItem('QUIZI_DATA_QUIZ')
+    return data !== null ? JSON.parse(data) : null
+  } catch (error) {
+    return null
+  }
+}
 
 export const useQuiz = () => {
   const { id } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [currentQuiz, setCurrentQuiz] = useState<QuizStatus>(undefined)
-  const quizStatus: CurrentQuizStatus = searchParams.get('status') ?? 'making'
-  const activeQuestion: number = parseInt(searchParams.get('currentIndex') ?? '0')
-  const rangeQuestion: number = parseInt(searchParams.get('range') ?? '0')
+  const [quiz, setQuiz] = useState<Quiz | null | undefined>(undefined)
+  const [quizSettings, setQuizSettings] = useState<QuizSettings>(defaultValues)
 
   useEffect(() => {
-    if (id === 'demo') return setCurrentQuiz(demo)
-    setCurrentQuiz(null)
+    const data = getQuizSettingsFromLocalStorage()
+    data && setQuizSettings(data as QuizSettings)
+
+    if (id === 'demo') return setQuiz(demo)
+    setQuiz(null)
   }, [id])
 
   const nextQuestion = useCallback(() => {
+    const { status, currentQuestions, currentQuestionIndex } = quizSettings
+
     // Check if there is a valid quiz
-    if (currentQuiz == null || quizStatus === 'finished') return
+    if (quiz == null || status === 'finished') return
 
     // Get the total number of questions
-    const questionsNumber = currentQuiz.questions.length - 1
-    let status = 'started'
-    let newActiveQuestion = activeQuestion
-
-    // Check if there is a next question
-    if (newActiveQuestion < questionsNumber) newActiveQuestion++
-    else status = 'finished'
+    const questionsNumber = currentQuestions.length - 1
+    const isFinishedQuiz = currentQuestionIndex >= questionsNumber
+    const increaseIndex = !isFinishedQuiz ? currentQuestionIndex + 1 : currentQuestionIndex
 
     // set new values
-    setSearchParams({
-      status,
-      currentIndex: newActiveQuestion.toString(),
-      range: rangeQuestion.toString()
-    })
-  }, [currentQuiz, activeQuestion])
+    setQuizSettings(prev => ({
+      ...prev,
+      status: isFinishedQuiz ? 'finished' : 'started',
+      currentQuestionIndex: increaseIndex
+    }))
+  }, [quiz, quizSettings])
 
   const startQuiz = useCallback((range: number) => {
-    setSearchParams({
+    if (quiz == null) return
+
+    const questions = quiz.questions.sort(() => Math.random() - 0.5)
+    const rangedQuestions = range > 0 ? questions.slice(0, range) : questions
+
+    setQuizSettings({
       status: 'started',
-      currentIndex: activeQuestion.toString(),
-      range: range.toString()
+      currentQuestions: rangedQuestions,
+      currentQuestionIndex: 0
     })
-  }, [])
+  }, [quiz])
 
   const finishQuiz = useCallback(() => {
-    setSearchParams({})
+    setQuizSettings(defaultValues)
   }, [])
 
   return {
-    quiz: currentQuiz,
-    question: currentQuiz?.questions[activeQuestion],
-    quizStatus,
+    quiz,
+    question: quizSettings?.currentQuestions[quizSettings.currentQuestionIndex],
+    quizStatus: quizSettings.status,
     nextQuestion,
     startQuiz,
     finishQuiz
