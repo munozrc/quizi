@@ -6,16 +6,28 @@ import { Card, CardHeader } from '../../../components/Card'
 
 import styles from './RenderQuestion.module.css'
 
-interface RenderQuestionProps extends QuestionType {
+interface RenderQuestionProps {
   isVisible: boolean
   questions: QuestionType[]
+  question: QuestionType
   goToNextQuestion: () => void
 }
 
-export const RenderQuestion = ({ isVisible, questions, goToNextQuestion, ...question } : RenderQuestionProps) => {
-  const { ref, isQuestionAnswered, checkAnswer } = useQuestion(question.answer, styles)
-  const currentIndex = questions.findIndex(q => q.statement === question.statement) + 1
+const defaultValues: QuestionType = {
+  answer: 0,
+  options: [],
+  statement: '',
+  type: ''
+}
+
+export const RenderQuestion = ({ isVisible, questions, question, goToNextQuestion } : RenderQuestionProps) => {
+  const { answer, statement, options } = question ?? defaultValues
+  const { ref, isQuestionAnswered, checkAnswer } = useQuestion(answer, styles)
+  const currentIndex = questions.findIndex(q => q.statement === statement) + 1
   const numberOfQuestions = questions.length
+
+  if (!question || typeof question === 'undefined') return null
+
   return (
     <Card isVisible={isVisible}>
       <CardHeader
@@ -24,15 +36,15 @@ export const RenderQuestion = ({ isVisible, questions, goToNextQuestion, ...ques
       />
       <div className={styles.container}>
         <header className={styles.header}>
-          <p className={styles.statement}>{question.statement}</p>
+          <p className={styles.statement}>{statement}</p>
         </header>
         <footer className={styles.footer}>
           <div className={styles.question}>
-            {question.options.map(({ key, value }) => (
+            {options.map(({ key, value }) => (
               <button
                 key={key}
                 name={key.toString()}
-                ref={key === question.answer ? ref : undefined}
+                ref={key === answer ? ref : undefined}
                 className={`${styles.option}`}
                 onClick={checkAnswer}
               >
