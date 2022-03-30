@@ -10,7 +10,8 @@ export interface Quiz {
   questions: Array<Question>
 }
 
-export type QuizStatus =
-  Quiz | // There is a quiz
-  null | // Valid quiz not found
-  undefined // A quiz is loading
+export interface QuizSettings {
+  currentQuestionIndex: number
+  currentQuestions: Question[]
+  status: 'started' | 'setup' | 'finished' | string
+}
