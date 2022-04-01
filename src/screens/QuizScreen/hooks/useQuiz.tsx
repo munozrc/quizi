@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { Quiz, QuizSettings } from '../../../typings'
 import demo from '../../../assets/demo.json'
+import { getQuizFromGoogleDrive } from '../../../services/getQuizFromGoogleDrive'
 
 const defaultValues: QuizSettings = {
   currentQuestionIndex: 0,
@@ -29,7 +30,7 @@ export const useQuiz = () => {
     data && setQuizSettings(data as QuizSettings)
 
     if (id === 'demo') return setQuiz(demo)
-    setQuiz(null)
+    getQuizFromGoogleDrive(id ?? '').then(setQuiz)
   }, [id])
 
   const nextQuestion = useCallback(() => {
