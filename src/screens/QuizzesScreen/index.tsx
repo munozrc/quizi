@@ -1,0 +1,1 @@
+export { QuizzesScreen } from './QuizzesScreen'
