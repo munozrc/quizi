@@ -55,8 +55,8 @@ export const useQuiz = () => {
   const startQuiz = useCallback((range: number) => {
     if (quiz == null) return
 
-    const questions = quiz.questions.sort(() => Math.random() - 0.5)
-    const rangedQuestions = range > 0 ? questions.slice(0, range) : questions
+    const randomQuestions = quiz.questions.sort(() => Math.random() - 0.5)
+    const rangedQuestions = range > 0 ? randomQuestions.slice(0, range) : randomQuestions
 
     setQuizSettings({
       status: 'started',
