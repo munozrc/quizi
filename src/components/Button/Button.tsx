@@ -9,7 +9,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({ variant = 'primary', children, disabled, ...props }: ButtonProps) => {
   return (
     <button
-      className={`${styles.btn} ${styles[variant]} ${disabled ? styles.disabled : ''}`}
+      className={`${styles.btn} ${styles[variant]}`}
+      disabled={disabled}
       {...props}
     >
       {children}

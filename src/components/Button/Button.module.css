@@ -33,7 +33,7 @@
   font-size: 2em;
 }
 
-.primary.disabled, .flat.disabled {
+.primary:disabled, .flat:disabled {
   cursor: not-allowed;
   opacity: 0.4;
 }
