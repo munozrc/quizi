@@ -23,9 +23,10 @@ export const QuizScreen = () => {
         <RenderQuestion
           key={question?.statement}
           isVisible={quizStatus === 'started'}
-          questions={questions}
           goToNextQuestion={nextQuestion}
           question={question}
+          numberOfQuestions={questions.length}
+          currentIndex={questions.indexOf(question) + 1}
         />
         <Results
           isVisible={quizStatus === 'finished'}

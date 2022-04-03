@@ -8,8 +8,9 @@ import styles from './RenderQuestion.module.css'
 
 interface RenderQuestionProps {
   isVisible: boolean
-  questions: QuestionType[]
   question: QuestionType
+  numberOfQuestions: number
+  currentIndex: number
   goToNextQuestion: () => void
 }
 
@@ -20,11 +21,10 @@ const defaultValues: QuestionType = {
   type: ''
 }
 
-export const RenderQuestion = ({ isVisible, questions, question, goToNextQuestion } : RenderQuestionProps) => {
+export const RenderQuestion = (props : RenderQuestionProps) => {
+  const { isVisible, question, currentIndex, numberOfQuestions, goToNextQuestion } = props
   const { answer, statement, options } = question ?? defaultValues
-  const { ref, isQuestionAnswered, checkAnswer } = useQuestion(answer, styles)
-  const currentIndex = questions.findIndex(q => q.statement === statement) + 1
-  const numberOfQuestions = questions.length
+  const { ref, isQuestionAnswered, randomOptions, checkAnswer } = useQuestion(answer, styles, options)
 
   if (!question || typeof question === 'undefined') return null
 
@@ -40,7 +40,7 @@ export const RenderQuestion = ({ isVisible, questions, question, goToNextQuestio
         </header>
         <footer className={styles.footer}>
           <div className={styles.question}>
-            {options.map(({ key, value }) => (
+            {randomOptions.map(({ key, value }) => (
               <button
                 key={key}
                 name={key.toString()}

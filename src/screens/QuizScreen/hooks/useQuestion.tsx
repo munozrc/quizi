@@ -1,7 +1,13 @@
-import { MouseEvent, useRef, useState } from 'react'
+import { MouseEvent, useMemo, useRef, useState } from 'react'
 
-export default function useQuestion (answer: number, styles: any) {
+interface OptionQuestion {
+  key: number
+  value: string
+}
+
+export default function useQuestion (answer: number, styles: any, options: OptionQuestion[]) {
   const correctAnswerRef = useRef<HTMLButtonElement>(null)
+  const randomOptions = useMemo(() => options.sort(() => Math.random() - 0.5), [options])
   const [isQuestionAnswered, setIsQuestionAnswered] = useState<boolean>(false)
 
   const checkAnswer = ({ target }: MouseEvent<HTMLElement>) => {
@@ -27,6 +33,7 @@ export default function useQuestion (answer: number, styles: any) {
   return {
     ref: correctAnswerRef,
     isQuestionAnswered,
+    randomOptions,
     checkAnswer
   }
 }
