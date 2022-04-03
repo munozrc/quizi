@@ -6,7 +6,7 @@ import { RenderQuestion, Results, Setup } from './components'
 import styles from './QuizScreen.module.css'
 
 export const QuizScreen = () => {
-  const { quiz, question, quizStatus, nextQuestion, startQuiz, finishQuiz } = useQuiz()
+  const { quiz, question, questions, quizStatus, nextQuestion, startQuiz, finishQuiz } = useQuiz()
 
   if (typeof quiz === 'undefined') return <Spinner />
   if (quiz === null) return <p>Quiz no encontrado</p>
@@ -23,7 +23,7 @@ export const QuizScreen = () => {
         <RenderQuestion
           key={question?.statement}
           isVisible={quizStatus === 'started'}
-          questions={quiz.questions}
+          questions={questions}
           goToNextQuestion={nextQuestion}
           question={question}
         />

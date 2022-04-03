@@ -72,6 +72,7 @@ export const useQuiz = () => {
   return {
     quiz,
     question: quizSettings?.currentQuestions[quizSettings.currentQuestionIndex],
+    questions: quizSettings?.currentQuestions,
     quizStatus: quizSettings.status,
     nextQuestion,
     startQuiz,
