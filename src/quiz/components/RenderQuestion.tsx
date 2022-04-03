@@ -1,6 +1,6 @@
 import useQuestion from '../hooks/useQuestion'
 import { Question as QuestionType } from '../types'
-import { ArrowIcon } from '../../components/icons'
+import { ArrowIcon } from '../../components/Icons'
 import { Button } from '../../components/Button'
 import { Card, CardHeader } from '../../components/Card'
 
